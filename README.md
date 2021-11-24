@@ -38,3 +38,43 @@ A masking rule may be defined on a column in a table, in order to obfuscate the 
 2. *Does not encrypt the data*—does not protect the underlying data, only masks it when responding to a query. To protect the underlying data, combine DDM with other SQL Server security features such as encryption, auditing, and row-level security.
 
 3. *Limitations*—you cannot define masking for the COLUMN_SET, FILESTREAM, or the Always Encrypted column. Masked columns cannot be used as keys for full-text indexes.
+
+# Examples: Creating a Dynamic Data Mask.
+The following example creates a table with three different types of dynamic data masks. The example populates the table, and selects to show the result.
+```SQL
+-- schema to contain user tables
+CREATE SCHEMA Data;
+GO
+
+-- table with masked columns
+CREATE TABLE Data.Membership(
+    MemberID        int IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+    FirstName        varchar(100) MASKED WITH (FUNCTION = 'partial(1, "xxxxx", 1)') NULL,
+    LastName        varchar(100) NOT NULL,
+    Phone            varchar(12) MASKED WITH (FUNCTION = 'default()') NULL,
+    Email            varchar(100) MASKED WITH (FUNCTION = 'email()') NOT NULL,
+    DiscountCode    smallint MASKED WITH (FUNCTION = 'random(1, 100)') NULL
+    );
+
+-- inserting sample data
+INSERT INTO Data.Membership (FirstName, LastName, Phone, Email, DiscountCode)
+VALUES   
+('Roberto', 'Tamburello', '555.123.4567', 'RTamburello@contoso.com', 10),  
+('Janice', 'Galvin', '555.123.4568', 'JGalvin@contoso.com.co', 5),  
+('Shakti', 'Menon', '555.123.4570', 'SMenon@contoso.net', 50),  
+('Zheng', 'Mu', '555.123.4569', 'ZMu@contoso.net', 40);
+```
+Now create a new user & give the user `SELECT` permission for `Data.Membership` table. You can manually create the user or can create as following. 
+```SQL
+CREATE USER MaskingTestUser WITHOUT LOGIN;  
+
+GRANT SELECT ON SCHEMA::Data TO MaskingTestUser;  
+  
+  -- impersonate for testing:
+EXECUTE AS USER = 'MaskingTestUser';  
+
+SELECT * FROM Data.Membership;  
+
+REVERT;
+```
+
