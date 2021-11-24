@@ -22,9 +22,15 @@ A masking rule may be defined on a column in a table, in order to obfuscate the 
 | Custom String             | Masking method that exposes the first and last letters and adds a custom padding string in the middle. prefix,[padding],suffix Note: If the original value is too short to complete the entire mask, part of the prefix or suffix will not be exposed.        | `FirstName varchar(100) MASKED WITH (FUNCTION = 'partial(prefix,[padding],suffix)') NULL`     |`ALTER COLUMN [Phone Number] ADD MASKED WITH (FUNCTION = 'partial(1,"XXXXXXX",0)')`    |
 
 
-## Advantages of Static Data Masking:
+## Advantages of Dynamic Data Masking:
 
-* *Permanent deletion* — sensitive data is permanently deleted when the data transformation is applied to the database. If a statically protected database is compromised, there is no sensitive data for the attacker to steal.
-* *No effect on performance* —all data transformations are applied in advance, so there is no performance impact per transaction.
-* *Protects production copies*—provides the best protection for copies of production databases, enabling access via other applications and native queries.
-* *Simplifies security of data copies*—there is no need to define granular object-level security policies, because all the sensitive data in the database has been masked.
+*Prevents unauthorized access*—makes it easy to prevent unauthorized disclosure of sensitive data. Administrators can allow privileged users or roles to access real data, and restrict access to other users, ensuring they only see masked data.
+*Easy to configure*—can be set up easily, and used with Transact-SQL commands, with no changes to application code.
+*Full and partial masking*—enables additional masking features, including full masking, partial masking, and randomized masking for numerical data.
+*Central policy*—makes it possible to set a central policy for data masking and apply it to all database users.
+
+## Disadvantages of Dynamic Data Masking:
+
+*Not a complete solution*—to achieve database security, you must use additional measures. There is no guarantee that all sensitive data will be correctly masked, and unauthorized users may eventually gain access to sensitive data.
+*Does not encrypt the data*—does not protect the underlying data, only masks it when responding to a query. To protect the underlying data, combine DDM with other SQL Server security features such as encryption, auditing, and row-level security.
+*Limitations*—you cannot define masking for the COLUMN_SET, FILESTREAM, or the Always Encrypted column. Masked columns cannot be used as keys for full-text indexes.
