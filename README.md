@@ -16,7 +16,7 @@ A masking rule may be defined on a column in a table, in order to obfuscate the 
 
 | Function           | Description     | Create Syntax  | Alter Syntax  |
 | ------------- |:-------------------- |:----------|:----------|
-| 1             | Raju          | Ahmed     |Ahmed     |
-| 2             | Tahira        | Biswas    |Biswas    |
-| 3             | Shohag        | Mia       |Biswas    |
-| 4             | Saiful        | Islam     |Biswas    |
+| Default             | this function lets you create a rule that masks the entire value when users with read-only privileges query the data. To do this, you need to specify a function name, as well as an empty set of parentheses. The function does not take arguments, and columns are masked according to the data type of the specified column          |  `Phone# varchar(12) MASKED WITH (FUNCTION = 'default()') NULL  `   | `ALTER COLUMN Gender ADD MASKED WITH (FUNCTION = 'default()')   `  |
+| Email             | Tahira        | Biswas    |Biswas    |
+| Random             | Shohag        | Mia       |Biswas    |
+| Custom String             | Saiful        | Islam     |Biswas    |
