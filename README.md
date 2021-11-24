@@ -77,4 +77,32 @@ SELECT * FROM Data.Membership;
 
 REVERT;
 ```
+# Adding or Editing a Mask on an Existing Column
+Use the ALTER TABLE statement to add a mask to an existing column in the table, or to edit the mask on that column.
+```SQL
+ALTER TABLE Data.Membership  
+ALTER COLUMN LastName ADD MASKED WITH (FUNCTION = 'partial(2,"xxxx",0)');
+--Another way
+ALTER TABLE Data.Membership  
+ALTER COLUMN LastName varchar(100) MASKED WITH (FUNCTION = 'default()');
 
+```
+# Granting Permissions to View Unmasked Data
+
+```sql
+GRANT UNMASK TO MaskingTestUser;  
+
+EXECUTE AS USER = 'MaskingTestUser';  
+
+SELECT * FROM Data.Membership;  
+
+REVERT;    
+  
+-- Removing the UNMASK permission  
+REVOKE UNMASK TO MaskingTestUser;
+```
+# Dropping a Dynamic Data Mask
+```sql
+ALTER TABLE Data.Membership   
+ALTER COLUMN LastName DROP MASKED;
+```
