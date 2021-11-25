@@ -48,12 +48,12 @@ GO
 
 -- table with masked columns
 CREATE TABLE Data.Membership(
-MemberID        INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
-FirstName       VARCHAR(100) MASKED WITH (FUNCTION = 'partial(1, "xxxxx", 1)') NULL,
-LastName        VARCHAR(100) NOT NULL,
-Phone           VARCHAR(12) MASKED WITH (FUNCTION = 'default()') NULL,
-Email           VARCHAR(100) MASKED WITH (FUNCTION = 'email()') NOT NULL,
-DiscountCode    SMALLINT MASKED WITH (FUNCTION = 'random(1, 100)') NULL
+  MemberID        INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+  FirstName       VARCHAR(100) MASKED WITH (FUNCTION = 'partial(1, "xxxxx", 1)') NULL,
+  LastName        VARCHAR(100) NOT NULL,
+  Phone           VARCHAR(12) MASKED WITH (FUNCTION = 'default()') NULL,
+  Email           VARCHAR(100) MASKED WITH (FUNCTION = 'email()') NOT NULL,
+  DiscountCode    SMALLINT MASKED WITH (FUNCTION = 'random(1, 100)') NULL
 );
 
 -- inserting sample data
