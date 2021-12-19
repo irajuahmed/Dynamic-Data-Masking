@@ -1,4 +1,4 @@
-# Dynamic Data Masking
+# Dynamic Data Masking in SQL Server.
 
 [Dynamic data masking](https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver15) ([DDM](https://satoricyber.com/sql-server-security/sql-server-data-masking/)) enables you to control which users view masked data and which roles can view sensitive data. You can use DDM to prevent unauthorized access to certain pieces of data by limiting the amount of sensitive data revealed.
 
