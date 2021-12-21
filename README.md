@@ -59,10 +59,10 @@ CREATE TABLE Data.Membership(
 -- inserting sample data
 INSERT INTO Data.Membership (FirstName, LastName, Phone, Email, DiscountCode)
 VALUES   
-('Roberto', 'Tamburello', '555.123.4567', 'RTamburello@contoso.com', 10),  
-('Janice', 'Galvin', '555.123.4568', 'JGalvin@contoso.com.co', 5),  
-('Shakti', 'Menon', '555.123.4570', 'SMenon@contoso.net', 50),  
-('Zheng', 'Mu', '555.123.4569', 'ZMu@contoso.net', 40);
+('Raju', 'Ahmed', '+8801XX-XXXX55', 'rajuahmed@mail.com', 10),  
+('Tahira', 'Anny', '+8801XX-XXXX58', 'tanny@contoso.com.co', 5),  
+('Shohag', 'Mia', '+8801XX-XXXX25', 'smia@contoso.net', 50),  
+('Moinul', 'Rabin', '+8801XX-XXXX87', 'mrobin@contoso.net', 40);
 ```
 Now create a new user & give the user `SELECT` permission for `Data.Membership` table. You can manually create the user or can create as following. 
 ```SQL
